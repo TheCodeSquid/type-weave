@@ -9,21 +9,21 @@ pub mod prelude {
 }
 
 pub trait Layer<T, U> {
-    fn layer(lower: T, upper: U) -> Self;
+    fn into_layered(lower: T, upper: U) -> Self;
 }
 
 impl Layer<bool, bool> for bool {
-    fn layer(lower: bool, upper: bool) -> Self {
+    fn into_layered(lower: bool, upper: bool) -> Self {
         upper || lower
     }
 }
 
 impl<T> Layer<Option<T>, Option<T>> for Option<T> {
-    fn layer(lower: Option<T>, upper: Option<T>) -> Self {
+    fn into_layered(lower: Option<T>, upper: Option<T>) -> Self {
         upper.or(lower)
     }
 }
 
 pub trait Merge<T, U> {
-    fn merge(left: T, right: U) -> Self;
+    fn into_merged(left: T, right: U) -> Self;
 }

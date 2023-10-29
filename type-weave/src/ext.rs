@@ -9,7 +9,7 @@ where
     T: Layer<S, U>,
 {
     fn layer(self, upper: U) -> T {
-        T::layer(self, upper)
+        T::into_layered(self, upper)
     }
 }
 
@@ -22,6 +22,6 @@ where
     T: Merge<S, U>,
 {
     fn merge(self, upper: U) -> T {
-        T::merge(self, upper)
+        T::into_merged(self, upper)
     }
 }

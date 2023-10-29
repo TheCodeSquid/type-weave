@@ -119,8 +119,8 @@ impl Action {
     fn trait_method(&self) -> Ident {
         use Action::*;
         match self {
-            Layer => parse_quote!(layer),
-            Merge => parse_quote!(merge),
+            Layer => parse_quote!(into_layered),
+            Merge => parse_quote!(into_merged),
         }
     }
 }
