@@ -1,0 +1,13 @@
+[workspace]
+resolver = "2"
+members = [
+  "type-weave",
+  "type-weave-derive"
+]
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Diego Sesmas Estrada <diegos7167@gmail.com>"]
+license = "MIT"
+description = "Helpers for joining custom data types"
+readme = "README.md"
