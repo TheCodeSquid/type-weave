@@ -8,5 +8,9 @@ description.workspace = true
 repository.workspace = true
 readme.workspace = true
 
+[features]
+default = ["derive"]
+derive = ["dep:type-weave-derive"]
+
 [dependencies]
-type-weave-derive = { path = "../type-weave-derive" }
+type-weave-derive = { path = "../type-weave-derive", optional = true }

@@ -7,12 +7,12 @@ use syn::{
     DataStruct, Fields, FieldsNamed, FieldsUnnamed, Ident, Result, Token, Type,
 };
 
-pub struct TypeMap {
+pub struct TypePair {
     pub left: Type,
     pub right: Option<Type>,
 }
 
-impl Parse for TypeMap {
+impl Parse for TypePair {
     fn parse(input: ParseStream) -> Result<Self> {
         let left = Type::Path(input.parse()?);
 
@@ -27,7 +27,7 @@ impl Parse for TypeMap {
     }
 }
 
-impl TypeMap {
+impl TypePair {
     pub fn gen_impl(self, name: &Ident, data: &DataStruct, action: Action) -> TokenStream {
         let left: Ident = parse_quote!(left);
         let right: Ident = parse_quote!(right);

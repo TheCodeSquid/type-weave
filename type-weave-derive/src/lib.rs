@@ -3,7 +3,7 @@ mod parse;
 use quote::quote;
 use syn::{parse_macro_input, Data, DeriveInput};
 
-use parse::{Action::*, TypeMap};
+use parse::{Action::*, TypePair};
 
 macro_rules! unwrap {
     ($result:expr) => {{
@@ -24,8 +24,8 @@ pub fn weave(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
         return quote! { compile_error!("currently only implemented for structs") }.into();
     };
 
-    let mut layer_maps: Vec<TypeMap> = vec![];
-    let mut merge_maps: Vec<TypeMap> = vec![];
+    let mut layer_maps: Vec<TypePair> = vec![];
+    let mut merge_maps: Vec<TypePair> = vec![];
 
     for attr in input.attrs {
         if attr.path().is_ident("layer") {

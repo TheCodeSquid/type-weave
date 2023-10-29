@@ -1,11 +1,19 @@
 //! A library that simplifies the combination of custom data types.
+//!
+//! This crate is in early development, so there are a number of missing features:
+//! - user-defined functions for extracting field values
+//! - derive support for non-struct data types
 
 pub mod ext;
 
+#[cfg(feature = "derive")]
 pub use type_weave_derive::Weave;
 
 pub mod prelude {
-    pub use super::{ext::*, Layer, Merge, Weave};
+    pub use super::{ext::*, Layer, Merge};
+
+    #[cfg(feature = "derive")]
+    pub use super::Weave;
 }
 
 pub trait Layer<T, U> {
