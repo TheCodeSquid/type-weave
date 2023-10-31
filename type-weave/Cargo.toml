@@ -15,4 +15,4 @@ default = ["derive"]
 derive = ["dep:type-weave-derive"]
 
 [dependencies]
-type-weave-derive = { version = "0.2.0", path = "../type-weave-derive", optional = true }
+type-weave-derive = { version = "0.3.0", path = "../type-weave-derive", optional = true }
