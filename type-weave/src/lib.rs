@@ -1,4 +1,4 @@
-//! A library that simplifies the combination of custom data types.
+//! A library for merging data in useful ways
 //!
 //! This crate is in early development, so there are a number of missing features:
 //! - user-defined functions for extracting field values
@@ -10,28 +10,31 @@ pub mod ext;
 pub use type_weave_derive::Weave;
 
 pub mod prelude {
-    pub use super::{ext::*, Layer, Merge};
-
-    #[cfg(feature = "derive")]
-    pub use super::Weave;
+    pub use crate::{ext::WeaveBelow as _, Weave};
 }
 
-pub trait Layer<T, U> {
-    fn into_layered(lower: T, upper: U) -> Self;
+pub trait Weave<T = Self> {
+    fn over(self, other: T) -> Self;
+
+    fn under(self, other: T) -> Self;
 }
 
-impl Layer<bool, bool> for bool {
-    fn into_layered(lower: bool, upper: bool) -> Self {
-        upper || lower
+impl Weave for bool {
+    fn over(self, other: Self) -> Self {
+        self || other
+    }
+
+    fn under(self, other: Self) -> Self {
+        self || other
     }
 }
 
-impl<T> Layer<Option<T>, Option<T>> for Option<T> {
-    fn into_layered(lower: Option<T>, upper: Option<T>) -> Self {
-        upper.or(lower)
+impl<T> Weave for Option<T> {
+    fn over(self, other: Self) -> Self {
+        self.or(other)
     }
-}
 
-pub trait Merge<T, U> {
-    fn into_merged(left: T, right: U) -> Self;
+    fn under(self, other: Self) -> Self {
+        other.or(self)
+    }
 }

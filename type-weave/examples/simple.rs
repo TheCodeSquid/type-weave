@@ -1,29 +1,26 @@
 use type_weave::prelude::*;
 
 #[derive(Weave, Debug)]
-#[layer(ConfigA, ConfigB)]
-struct ConfigA {
-    fast: bool,
-    message: Option<&'static str>,
-}
-
-#[derive(Debug)]
-struct ConfigB {
-    fast: bool,
-    message: Option<&'static str>,
+struct Config {
+    release: bool,
+    package: Option<&'static str>,
 }
 
 fn main() {
-    let layer1 = ConfigA {
-        fast: true,
-        message: Some("Will not be seen!"),
+    let c1 = Config {
+        release: false,
+        package: Some("this"),
+    };
+    let c2 = Config {
+        release: true,
+        package: None,
+    };
+    let c3 = Config {
+        release: false,
+        package: Some("that"),
     };
 
-    let layer2 = ConfigB {
-        fast: false,
-        message: Some("Layer 2 stuff"),
-    };
-
-    let config: ConfigA = layer1.layer(layer2);
-    println!("{:#?}", config);
+    let config = c1.under(c2).under(c3);
+    // should print: `Config { release: true, package: Some("that") }`
+    println!("{:?}", config);
 }
