@@ -14,6 +14,7 @@ macro_rules! unwrap {
     };
 }
 
+/// Implement `Weave` for a struct whose fields all implement the trait.
 #[proc_macro_derive(Weave)]
 pub fn weave(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as DeriveInput);

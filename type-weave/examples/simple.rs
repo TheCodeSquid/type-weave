@@ -1,4 +1,4 @@
-use type_weave::prelude::*;
+use type_weave::Weave;
 
 #[derive(Weave, Debug)]
 struct Config {

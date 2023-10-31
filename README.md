@@ -1,11 +1,8 @@
 # type-weave
 
-<!-- cargo-rdme start -->
+A library for merging layered data.
 
-A library that simplifies the combination of custom data types.
+This crate is primarily intended for helping with configuration,
+as multiple instances of a struct may need to be joined in a layered fashion.
 
-This crate is in early development, so there are a number of missing features:
-- user-defined functions for extracting field values
-- derive support for non-struct data types
-
-<!-- cargo-rdme end -->
+[Documentation](https://docs.rs/type-weave)
